@@ -1,6 +1,7 @@
 const bodyParser = require('body-parser');
 const express = require('express');
 const calcsRouter = require('./routes/calcs');
+const booksRouter = require('./routes/books');
 
 const env = process.env.NODE_ENV || 'development';
 
@@ -18,6 +19,8 @@ app.get('/hello', (req, res) => {
 });
 
 app.use('/calcs', calcsRouter);
+
+app.use('/books', booksRouter);
 // ----- Routes -----
 
 
