@@ -113,4 +113,39 @@ router.delete('/del', (req, res) => {
 
 });
 
+router.post('/att', (req, res) => {
+    const {id} = req.body;
+    const {nome} = req.body;
+
+    //make url
+    var fullUrl = 'POST(att) ' + req.protocol + '://' + req.get('host') + req.originalUrl + " " + JSON.stringify(req.body);
+    console.log(fullUrl);
+
+    //send url to log
+    log.info(fullUrl);
+  
+    //verify id and nome
+    if (!id || !nome) {
+      res.sendStatus(400);
+    }
+
+    //db connect
+    MongoClient.connect(url, { useNewUrlParser: true }, function(err, db){
+
+        if(err) throw err;
+        var dbo = db.db("mydb");
+        var myquery = { id: id };
+        var newvalues = { $set: {nome: nome} };
+
+        dbo.collection("books").updateOne(myquery, newvalues, function(err, res) {
+        
+            if (err) throw err;
+            console.log("updated");
+            db.close();
+        });
+    });
+  
+    res.json({update: id + ' - ' + nome});
+});
+
 module.exports = router;

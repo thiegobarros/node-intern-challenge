@@ -55,4 +55,8 @@ http://localhost:7777/books/get/:id <-GET by id
 http://localhost:7777/books/del <-DELETE
 
 ```
+```bash
+http://localhost:7777/books/att <-POST (att by id, set new nome)
+
+```
 Todas as url das requisições serão gravadas no arquivo urls.log
