@@ -79,4 +79,38 @@ router.get('/get/:id', (req, res) => {
 
 });
 
+router.delete('/del', (req, res) => {
+    const {id} = req.body;
+    const {nome} = req.body;
+
+    //make url
+    var fullUrl = 'DELETE ' + req.protocol + '://' + req.get('host') + req.originalUrl + " " + JSON.stringify(req.body);
+    console.log(fullUrl);
+
+    //send url to log
+    log.info(fullUrl);
+  
+    //verify id and nome
+    if (!id || !nome) {
+      res.sendStatus(400);
+    }
+
+    //db connect
+    MongoClient.connect(url, { useNewUrlParser: true }, function(err, db){
+
+        if(err) throw err;
+        var dbo = db.db("mydb");
+        var myobj = {id: id, nome: nome};
+     
+        dbo.collection("books").deleteOne(myobj, function(err, obj) {
+        
+            if (err) throw err;
+            console.log("deleted");
+            res.json({message: 'deletou!'});
+            db.close();
+        });
+    });
+
+});
+
 module.exports = router;

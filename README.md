@@ -44,11 +44,15 @@ Assumindo que o testador tenha mongoDB, Linux OS e Postman
 3. Digite "exit" para sair da instância do mongodb.
 4. Utilizando a ferramenta Postman é possível testar as rotas:
 ```bash
-http://localhost:7777/books/add
+http://localhost:7777/books/add <-POST
 
 ```
 ```bash
-http://localhost:7777/books/get/:id
+http://localhost:7777/books/get/:id <-GET by id
+
+```
+```bash
+http://localhost:7777/books/del <-DELETE
 
 ```
 Todas as url das requisições serão gravadas no arquivo urls.log
