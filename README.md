@@ -37,4 +37,18 @@ curl -X POST http://localhost:7777/calcs/fib -H 'Content-Type: application/json'
 
 ## Resultados
 
+Assumindo que o testador tenha mongoDB, Linux OS e Postman
 
+1. Usando o comando "mongo" no terminal, entra-se na instância do mongodb.
+2. Usando o comando "use mydb", estará utilizando a instância mydb.
+3. Digite "exit" para sair da instância do mongodb.
+4. Utilizando a ferramenta Postman é possível testar as rotas:
+```bash
+http://localhost:7777/books/add
+
+```
+```bash
+http://localhost:7777/books/get/:id
+
+```
+Todas as url das requisições serão gravadas no arquivo urls.log

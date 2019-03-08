@@ -1,5 +1,12 @@
 const router = require('express').Router();
 
+const SimpleNodeLogger = require('simple-node-logger'),
+    opts = {
+        logFilePath:'urls.log',
+        timestampFormat:'YYYY-MM-DD HH:mm:ss.SSS'
+    },
+log = SimpleNodeLogger.createSimpleLogger( opts );
+
 function fat (n) { // TODO
   
   if (n == 0) {
@@ -27,6 +34,13 @@ function fib (n) {
 router.post('/fat', (req, res) => {
   const {n} = req.body;
 
+  //make url
+  var fullUrl = 'POST ' + req.protocol + '://' + req.get('host') + req.originalUrl + " " + JSON.stringify(req.body);
+  console.log(fullUrl);
+
+  //send url to log
+  log.info(fullUrl);
+
   if (!n) {
     res.sendStatus(400);
   }
@@ -36,6 +50,13 @@ router.post('/fat', (req, res) => {
 
 router.post('/fib', (req, res) => {
   const {n} = req.body;
+
+  //make url
+  var fullUrl = 'POST ' + req.protocol + '://' + req.get('host') + req.originalUrl + " " + JSON.stringify(req.body);
+  console.log(fullUrl);
+
+  //send url to log
+  log.info(fullUrl);
 
   if (!n) {
     res.sendStatus(400);
